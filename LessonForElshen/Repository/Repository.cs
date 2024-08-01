@@ -38,5 +38,10 @@ namespace LessonForElshen.Repository
         {
             await _context.Set<T>().AddAsync(entity).ConfigureAwait(false);
         }
+
+        public IQueryable<T> GetAll(Expression<Func<T, bool>> predicate)
+        {
+            return _context.Set<T>().Where(predicate);
+        }
     }
 }
