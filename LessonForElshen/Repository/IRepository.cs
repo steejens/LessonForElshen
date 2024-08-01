@@ -5,7 +5,9 @@ namespace LessonForElshen.Repository
     public interface IRepository<T> where T : class, new()
     {
         IQueryable<T> GetAll();
-       
+        IQueryable<T> GetAll(Expression<Func<T, bool>> predicate);
+
+
         Task<int> CountAsync();
        
 
