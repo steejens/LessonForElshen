@@ -2,7 +2,6 @@ using LessonForElshen;
 using LessonForElshen.Repository;
 using LessonForElshen.Repository.CategoryRepository;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
