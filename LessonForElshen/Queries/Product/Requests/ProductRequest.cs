@@ -1,5 +1,4 @@
-﻿
-namespace LessonForElshen.RequestTypes
+﻿namespace LessonForElshen.Queries.Product.Requests
 {
     public class ProductRequest
     {

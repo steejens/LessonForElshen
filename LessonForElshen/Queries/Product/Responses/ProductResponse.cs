@@ -1,8 +1,10 @@
-﻿namespace LessonForElshen.ResponseTypes
+﻿using LessonForElshen.Commands.Categories.Responses;
+
+namespace LessonForElshen.Queries.Product.Responses
 {
     public class ProductResponse
     {
-        public  int Id { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public CategoryResponse? Category { get; set; }
         public string Description { get; set; }

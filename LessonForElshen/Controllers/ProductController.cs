@@ -2,11 +2,12 @@
 using LessonForElshen.Extensions;
 using LessonForElshen.Repository;
 using LessonForElshen.Repository.ProductRepository;
-using LessonForElshen.RequestTypes;
-using LessonForElshen.ResponseTypes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using LessonForElshen.Queries.Product;
+using LessonForElshen.Queries.Product.Requests;
+using LessonForElshen.Queries.Product.Responses;
 
 namespace LessonForElshen.Controllers
 {
@@ -14,11 +15,13 @@ namespace LessonForElshen.Controllers
     {
         private readonly IProductRepository _productRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly GetProductsByCategory _getProductsByCategoryHandler;
 
-        public ProductController(IProductRepository productRepository, IUnitOfWork unitOfWork)
+        public ProductController(IProductRepository productRepository, IUnitOfWork unitOfWork, GetProductsByCategory getProductsByCategoryHandler)
         {
             _productRepository = productRepository;
             _unitOfWork = unitOfWork;
+            _getProductsByCategoryHandler = getProductsByCategoryHandler;
         }
 
         [Produces("application/json")]
@@ -45,37 +48,7 @@ namespace LessonForElshen.Controllers
         public async Task<List<ProductResponse>> GetProduct([FromQuery] int? id)
 
         {
-            Expression<Func<Product, bool>> predicate = x => true;
-            if (id != null)
-            {
-                Expression<Func<Product, bool>> CategoryPredicate = x => x.CatId == id;
-
-                // Combine the predicates using 'AndAlso'
-                predicate = predicate.AndAlso(CategoryPredicate);
-            }
-            var products =await _productRepository.GetAll(predicate).Include("Category").ToListAsync();
-            var response = new List<ProductResponse>();
-
-            foreach (var product in products)
-            {
-                var categoryDto = new CategoryResponse();
-                if (product.Category != null)
-                {
-                    categoryDto.Title = product.Category.Title;
-                    categoryDto.Id = product.Category.Id;
-                }
-
-                var productDto = new ProductResponse {
-                    Id = product.Id,
-                    Title = product.Title,
-                    Description = product.Description,
-                    Count = product.Count,
-                    Price = product.Price,
-                    Category = categoryDto
-                };
-                response.Add(productDto);
-            }
-
+            var response =await _getProductsByCategoryHandler.Handler(id);
             return response;
 
         }

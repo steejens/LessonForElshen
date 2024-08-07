@@ -3,6 +3,7 @@ using System;
 using LessonForElshen;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace LessonForElshen.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240807161644_Test-entity-removed")]
+    partial class Testentityremoved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,7 +51,7 @@ namespace LessonForElshen.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", "prdSchema");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("LessonForElshen.Entities.Product", b =>
@@ -92,7 +95,7 @@ namespace LessonForElshen.Migrations
 
                     b.HasIndex("CatId");
 
-                    b.ToTable("Products", "prdSchema");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("LessonForElshen.Entities.Product", b =>

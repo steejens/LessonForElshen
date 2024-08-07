@@ -25,7 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Commands\Products\Requests\" />
+    <Folder Include="Commands\Products\Responses\" />
     <Folder Include="Entities\NewFolder\" />
+    <Folder Include="Queries\Categories\Responses\" />
+    <Folder Include="Queries\Categories\Requests\" />
   </ItemGroup>
 
 </Project>

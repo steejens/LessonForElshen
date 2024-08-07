@@ -2,7 +2,7 @@
 
 namespace LessonForElshen.Entities
 {
-    public class Category
+    public class Category:BaseEntity
     {
         [Key]
         public int Id { get; set; }

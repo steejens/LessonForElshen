@@ -6,7 +6,6 @@ namespace LessonForElshen
     public class ApplicationDbContext : DbContext
 
     {
-        public DbSet<TestEntity> TestEntities { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
 
@@ -17,7 +16,9 @@ namespace LessonForElshen
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<TestEntity>().ToTable("TestEntities", "TestSchema");
+            modelBuilder.Entity<Product>().ToTable("Products", "prdSchema");
+            modelBuilder.Entity<Category>().ToTable("Categories", "prdSchema");
+
 
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace LessonForElshen.ResponseTypes
+﻿namespace LessonForElshen.Commands.Categories.Responses
 {
     public class CategoryResponse
     {

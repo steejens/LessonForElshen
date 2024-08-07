@@ -1,5 +1,5 @@
+using LessonForElshen.Commands.Categories.Requests;
 using LessonForElshen.Entities;
-using LessonForElshen.RequestTypes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LessonForElshen.Controllers
@@ -36,7 +36,7 @@ namespace LessonForElshen.Controllers
         }
 
         [HttpPost(Name="category")]
-        public string AddCategory([FromBody] CategoryRequest request)
+        public string AddCategory([FromBody] CreateCategoryRequest request)
         {
             try
             {

@@ -1,10 +1,11 @@
-﻿using LessonForElshen.Entities;
+﻿using LessonForElshen.Commands.Categories;
+using LessonForElshen.Commands.Categories.Requests;
+using LessonForElshen.Commands.Categories.Responses;
 using LessonForElshen.Repository;
 using LessonForElshen.Repository.CategoryRepository;
-using LessonForElshen.RequestTypes;
-using LessonForElshen.ResponseTypes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using CategoryResponse = LessonForElshen.Commands.Categories.Responses.CategoryResponse;
 
 namespace LessonForElshen.Controllers
 {
@@ -12,25 +13,22 @@ namespace LessonForElshen.Controllers
     {
         private readonly ICategoryRepository _categoryRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly CreateCategory _createCategory;
 
-        public CategoryController(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork)
+        public CategoryController(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork, CreateCategory createCategory)
         {
             _categoryRepository = categoryRepository;
             _unitOfWork = unitOfWork;
+            _createCategory = createCategory;
         }
 
         [Produces("application/json")]
         [HttpPost]
-        public async Task<string> Add([FromBody] CategoryRequest request)
+        public async Task<CreateCategoryResponse> Add([FromBody] CreateCategoryRequest request)
 
         {
-
-           await _categoryRepository.AddAsync(new Category()
-            {
-                Title = request.Title,
-            });
-            await _unitOfWork.CompleteAsync(CancellationToken.None);
-            return "success";
+            var response =await _createCategory.Handler(request);
+            return response;
 
         }
 
