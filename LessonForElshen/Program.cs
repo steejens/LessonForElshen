@@ -25,7 +25,6 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<GetProductsByCategory>();
 builder.Services.AddScoped<CreateCategory>();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
